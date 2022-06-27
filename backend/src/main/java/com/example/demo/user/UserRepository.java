@@ -1,4 +1,4 @@
-package user;
+package com.example.demo.user;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
