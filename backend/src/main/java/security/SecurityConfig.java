@@ -17,12 +17,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final MongoUserDetailsService userDetailsService;
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return new Argon2PasswordEncoder();
+        return NoOpPasswordEncoder.getInstance();
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/**").permitAll()
                 .and().formLogin();
     }
 

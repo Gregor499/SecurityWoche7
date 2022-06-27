@@ -24,6 +24,4 @@ public class UserController {
     public ResponseEntity<UserDTO> findUserByUsername(@PathVariable String username){
         return ResponseEntity.of(userService.findByName(username));
     }
-
-
 }
