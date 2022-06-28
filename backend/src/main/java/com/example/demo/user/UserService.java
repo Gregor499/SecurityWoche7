@@ -13,19 +13,11 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepo;
-
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder encoder;
 
     public void createNewUser(User newUser) {
-        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        String encodedPassword = encoder.encode(newUser.getPassword());
+        newUser.setPassword(encodedPassword);
         userRepo.save(newUser);
-    }
-
-    public Optional<UserDTO> findByName(String username) {
-        Optional<User> optUser = userRepo.findByUsername(username);
-        if (optUser.isPresent()){
-            return Optional.of(new UserDTO(optUser.get().getUsername()));
-        }
-        return Optional.empty();
     }
 }

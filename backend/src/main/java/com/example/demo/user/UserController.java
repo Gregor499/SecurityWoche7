@@ -12,25 +12,17 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    private final UserService myUserService;
 
     @PostMapping
-    public void postNewUser(@RequestBody User newUser){
-        userService.createNewUser(newUser);
+    public void postNewUser(@RequestBody User newUser) {
+        myUserService.createNewUser(newUser);
     }
 
 
-    @GetMapping("/{username}")
-    public ResponseEntity<UserDTO> findUserByUsername(@PathVariable String username){
-        return ResponseEntity.of(userService.findByName(username));
-    }
-
-    @GetMapping("me")
-    public UserDTO getLoggedInUser(Principal principal){
-        String username = principal.getName();
-
-        return userService
-                .findByName(username)
-                .orElseThrow();
+    @GetMapping
+    public String getUsername(Principal principal) {
+        return principal.getName();
     }
 }
+
