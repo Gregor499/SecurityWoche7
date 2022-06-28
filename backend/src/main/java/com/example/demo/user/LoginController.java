@@ -16,7 +16,6 @@ import java.util.HashMap;
 @RestController
 @RequestMapping("/api/login")
 @RequiredArgsConstructor
-
 public class LoginController {
 
     private final AuthenticationManager authenticationManager;
@@ -27,8 +26,9 @@ public class LoginController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginData.getUsername(), loginData.getPassword()));
             return ResponseEntity.ok(new LoginResponse(jwtService.createToken(new HashMap<>(), loginData.getUsername())));
-        } catch (Exception e) {
+        } catch(Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+
     }
 }
