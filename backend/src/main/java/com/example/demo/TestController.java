@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -13,9 +14,8 @@ public class TestController {
     private List<String> greetings = Arrays.asList("Hallo", "Moin", "Servus");
 
     @GetMapping(path="/api/greeting", produces="text/plain")
-    public String hello() {
+    public String hello(Principal principal) {
         Random rand = new Random();
-        return greetings.get(rand.nextInt(greetings.size()));
+        return greetings.get(rand.nextInt(greetings.size())) + " "+ principal.getName();
     }
-
 }
